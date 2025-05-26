@@ -1,0 +1,46 @@
+my-rocketseat-app/
+├── public/
+│   └── index.html
+├── src/
+│   ├── assets/                  # Imagens e arquivos estáticos
+│   ├── components/              # Componentes reutilizáveis
+│   │   ├── Button/
+│   │   │   ├── Button.js
+│   │   │   ├── Button.test.js
+│   │   │   └── Button.css
+│   │   └── Modal/
+│   │       ├── Modal.js
+│   │       ├── Modal.test.js
+│   │       └── Modal.css
+│   ├── context/                 # Contextos para estado global
+│   │   └── AuthContext.js
+│   ├── features/                # Funcionalidades específicas da aplicação
+│   │   ├── Auth/
+│   │   │   ├── Login.js
+│   │   │   ├── Register.js
+│   │   │   └── authSlice.js
+│   │   └── Dashboard/
+│   │       ├── Dashboard.js
+│   │       ├── Dashboard.css
+│   │       └── Dashboard.test.js
+│   ├── hooks/                   # Hooks personalizados
+│   │   ├── useAuth.js
+│   │   └── useFetch.js
+│   ├── pages/                   # Páginas principais da aplicação
+│   │   ├── Home.js
+│   │   └── Profile.js
+│   ├── services/                # Serviços de API e outras integrações externas
+│   │   ├── api.js
+│   │   └── authService.js
+│   ├── styles/                  # Estilos globais
+│   │   ├── variables.css
+│   │   └── main.css
+│   ├── utils/                   # Utilitários e funções auxiliares
+│   │   ├── formatDate.js
+│   │   └── slugify.js
+│   ├── App.js
+│   ├── index.js
+│   └── setupTests.js            # Configurações globais para testes
+├── .env                         # Variáveis de ambiente
+├── package.json
+└── README.md
