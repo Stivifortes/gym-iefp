@@ -1,8 +1,16 @@
-var express = require('express');
-var app = express();
-app.get('/', function (req, res) {
-  res.send('Hello World!');
+const express = require('express');
+const db = require('./src/db/db'); // Caminho corrigido para o db.js
+
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World');
 });
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+
+// Exemplo opcional para testar a conexão
+
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
 });
+
+module.exports = app;
