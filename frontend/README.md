@@ -1,6 +1,6 @@
 # Frontend do progeto
 
-## Estrutura de pasta
+## Estrutura de pastas
 
 frontend/
 ├── public/
