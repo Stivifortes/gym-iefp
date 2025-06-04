@@ -10,20 +10,19 @@ import Utilizadores from '../pages/Utilizadores';
 import Dashboard from '../pages/Dashboard';
 
 export default function AppRoutes() {
-    return (
-        <Router>
-            <Routes>
-                <Route path='/' element={<Layout />} />
-                <Route index element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/registro" element={<Registro />} />
-                <Route path="/perfil" element={<Perfil />} />
-                <Route path="/planos" element={<Planos />} />
-                <Route path="/inscricoes" element={<Inscricoes />} />
-                <Route path="/utilizadores" element={<Utilizadores />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-            </Routes>
-        </Router>
-
-    )
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />} />
+        <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/planos" element={<Planos />} />
+        <Route path="/inscricoes" element={<Inscricoes />} />
+        <Route path="/utilizadores" element={<Utilizadores />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
+  );
 }
