@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #CACACA;
+  background-color: #cacaca;
 }
 
 .recupera-box {
@@ -83,7 +83,7 @@
 .botao {
   width: 100%;
   padding: 14px;
-  background-color: #257CFF;
+  background-color: #257cff;
   color: white;
   border: none;
   border-radius: 15px;

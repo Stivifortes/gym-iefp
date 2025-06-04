@@ -1,14 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../pages/Login";
-import Registro from "../pages/Registro";
-import Layout from "../components/Layout";
-import Home from "../pages/Home";
-import Perfil from "../pages/Perfil";
-import Planos from "../pages/Planos";
-import Inscricoes from "../pages/Inscricoes";
-import Utilizadores from "../pages/Utilizadores";
-import Dashboard from "../pages/Dashboard";
-import RecuperaSenha from "../pages/RecuperaSenha";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from '../pages/Login';
+import Registro from '../pages/Registro';
+import Layout from '../components/Layout';
+import Home from '../pages/Home';
+import Perfil from '../pages/Perfil';
+import Planos from '../pages/Planos';
+import Inscricoes from '../pages/Inscricoes';
+import Utilizadores from '../pages/Utilizadores';
+import Dashboard from '../pages/Dashboard';
+import RecuperaSenha from '../pages/RecuperaSenha';
 
 export default function AppRoutes() {
   return (

@@ -1,5 +1,5 @@
-import "./RecuperaSenha.css";
-import Logo from "../../assets/LoginLogo.png";
+import './RecuperaSenha.css';
+import Logo from '../../assets/LoginLogo.png';
 
 export default function RecuperaSenha() {
   return (
