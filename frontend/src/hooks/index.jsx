@@ -5,14 +5,16 @@ export function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const token = localStorage.getItem('token');
 
     if (token) {
-      fetch('http://localhost:3000/usuario', {
+      fetch(`${API_URL}/usuario`, {
         method: 'GET',
         headers: {
-          Authorization: 'Token ' + token,
+          Authorization: 'Bearer ' + token,
         },
       })
         .then((res) => res.json())
@@ -20,28 +22,16 @@ export function useAuth() {
           setUser(data);
           setIsAuthenticated(true);
 
-
           if (data.role === 'admin') {
             setIsAdmin(true);
-            console.log('Admin');
-          } else {
-            setIsAdmin(false);
-            console.log('Usuário');
           }
-          
         })
-        .catch((error) => {
-          console.log('Erro ao buscar usuário:', error);
-          setIsAuthenticated(false);
-        });
     }
-  }, []);
+  }, [API_URL]);
 
   return {
     user,
     isAuthenticated,
     isAdmin,
-
   };
-    
-}   
+}
