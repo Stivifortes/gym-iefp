@@ -6,12 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint:html": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --format html > lint.html",
+    "prettier:write": "prettier --config .prettierrc.cjs --write .",
+    "prettier:check": "prettier --config .prettierrc.cjs --check ."
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
@@ -19,9 +23,12 @@
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
     "eslint": "^9.25.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "prettier": "3.5.3",
     "vite": "^6.3.5"
   }
 }
