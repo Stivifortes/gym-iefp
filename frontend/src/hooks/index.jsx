@@ -5,7 +5,7 @@ export function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_APP_API_URL;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -25,7 +25,7 @@ export function useAuth() {
           if (data.role === 'admin') {
             setIsAdmin(true);
           }
-        })
+        });
     }
   }, [API_URL]);
 
