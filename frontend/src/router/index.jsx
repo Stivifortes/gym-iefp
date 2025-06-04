@@ -8,6 +8,7 @@ import Planos from '../pages/Planos';
 import Inscricoes from '../pages/Inscricoes';
 import Utilizadores from '../pages/Utilizadores';
 import Dashboard from '../pages/Dashboard';
+import RecuperaSenha from '../pages/RecuperaSenha';
 
 export default function AppRoutes() {
   return (
@@ -22,6 +23,7 @@ export default function AppRoutes() {
         <Route path="/inscricoes" element={<Inscricoes />} />
         <Route path="/utilizadores" element={<Utilizadores />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/recupera-senha" element={<RecuperaSenha />} />
       </Routes>
     </Router>
   );

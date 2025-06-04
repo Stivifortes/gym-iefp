@@ -45,5 +45,10 @@ export default defineConfig([
     plugins: { css },
     language: 'css/css',
     extends: ['css/recommended']
+  },
+  {
+    globals: {
+      process: true
+    }
   }
 ])
