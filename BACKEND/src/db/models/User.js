@@ -63,6 +63,10 @@ const User = (connection, sequelize) => {
       endereco: {
         type: DataTypes.STRING,
         allowNull: true
+      },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     },
     {
