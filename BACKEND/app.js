@@ -3,13 +3,16 @@ const express = require('express')
 const cors = require('cors')
 const { syncDatabase } = require('./src/db/models')
 const appRoutes = require('./src/routes')
-
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./src/docs/swagger-output.json')
 const app = express()
 
 // Middleware
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 // Rotas
 app.get('/', (req, res) => {
