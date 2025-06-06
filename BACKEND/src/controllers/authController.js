@@ -31,10 +31,10 @@ const register = async (req, res) => {
 
     // Gerar token JWT
     const token = jwt.sign(
-      { 
-        id: user.id, 
+      {
+        id: user.id,
         email: user.email,
-        name: user.name 
+        name: user.name
       },
       JWT_SECRET,
       { expiresIn: '24h' }
@@ -56,13 +56,12 @@ const register = async (req, res) => {
       user: userResponse,
       token
     })
-
   } catch (error) {
     console.error('Erro no registro:', error)
-    
+
     // Tratar erros de validação do Sequelize
     if (error.name === 'SequelizeValidationError') {
-      const errors = error.errors.map(err => err.message)
+      const errors = error.errors.map((err) => err.message)
       return res.status(400).json({ error: 'Dados inválidos', details: errors })
     }
 
@@ -94,10 +93,10 @@ const login = async (req, res) => {
 
     // Gerar token JWT
     const token = jwt.sign(
-      { 
-        id: user.id, 
+      {
+        id: user.id,
         email: user.email,
-        name: user.name 
+        name: user.name
       },
       JWT_SECRET,
       { expiresIn: '24h' }
@@ -119,7 +118,6 @@ const login = async (req, res) => {
       user: userResponse,
       token
     })
-
   } catch (error) {
     console.error('Erro no login:', error)
     res.status(500).json({ error: 'Erro interno do servidor' })

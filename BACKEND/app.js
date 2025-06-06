@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const { syncDatabase } = require('./src/db/models')
-const authRoutes = require('./src/routes/authRoutes')
+const appRoutes = require('./src/routes')
 
 const app = express()
 
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 })
 
 // Rotas de autenticação
-app.use('/api/auth', authRoutes)
+app.use('/api', appRoutes)
 
 // Inicializar banco de dados e servidor
 const startServer = async () => {
