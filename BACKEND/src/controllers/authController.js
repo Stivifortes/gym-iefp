@@ -8,12 +8,49 @@ const User = db.models.User
 // Registrar usuário
 const register = async (req, res) => {
   try {
-    const { name, email, password, phone, endereco } = req.body
+    const { name, email, password, confirmPassword, phone, endereco } = req.body
 
+    // Validar campos obrigatórios
+    if (!name) {
+      return res.status(400).json({ error: 'O nome è obrigatório' })
+    }
+    if (!phone) {
+      return res.status(400).json({ error: 'O telefone è obrigatório' })
+    }
+
+    if (!endereco) {
+      return res.status(400).json({ error: 'O endereco è obrigatório' })
+    }
+    if (!email) {
+      return res.status(400).json({ error: 'O email è obrigatório' })
+    }
+    if (!password) {
+      return res.status(400).json({ error: 'A senha è obrigatória' })
+    }
+    if (!confirmPassword) {
+      return res
+        .status(400)
+        .json({ error: 'A confirmação de senha è obrigatória' })
+    }
     // Verificar se o usuário já existe
     const existingUser = await User.findOne({ where: { email } })
     if (existingUser) {
       return res.status(400).json({ error: 'Email já está em uso' })
+    }
+
+    // Verificar se as senhas coincidem
+    if (password !== confirmPassword) {
+      return res.status(400).json({ error: 'As senhas não coincidem' })
+    }
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ error: 'A senha deve ter pelo menos 6 caracteres' })
+    }
+    if (password.length > 255) {
+      return res
+        .status(400)
+        .json({ error: 'A senha deve ter no máximo 255 caracteres' })
     }
 
     // Hash da senha
