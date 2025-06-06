@@ -9,10 +9,12 @@ import Inscricoes from '../pages/Inscricoes';
 import Utilizadores from '../pages/Utilizadores';
 import Dashboard from '../pages/Dashboard';
 import RecuperaSenha from '../pages/RecuperaSenha';
+import MenuLateral from '../components/MenuLateral';
 
 export default function AppRoutes() {
   return (
     <Router>
+      <MenuLateral/>
       <Routes>
         <Route path="/" element={<Layout />} />
         <Route index element={<Home />} />
