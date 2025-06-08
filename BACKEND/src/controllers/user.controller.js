@@ -1,64 +1,104 @@
-const db = require('../db/models/User'); // Importa o modelo User do Sequelize
+const db = require('../db/models/User');
 const User = db.User;
+const { validationResult } = require('express-validator');
 
 // Obter todos os utilizadores
 exports.findAll = async (req, res) => {
   try {
     const users = await User.findAll();
-    res.json(users);
+    return res.json(users);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
 // Obter um utilizador por ID
 exports.findOne = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    // Validação do ID
+    const id = req.params.id;
+    
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: 'ID inválido. Deve ser um número.' });
+    }
+
+    const user = await User.findByPk(id);
+    
     if (!user) {
       return res.status(404).json({ error: 'Utilizador não encontrado' });
     }
-    res.json(user);
+    
+    return res.json(user);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
 // Atualizar um utilizador
 exports.update = async (req, res) => {
   try {
+    // Validação do ID
+    const id = req.params.id;
+    
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: 'ID inválido. Deve ser um número.' });
+    }
+
+    // Validação do corpo da requisição
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Verificar se o corpo da requisição não está vazio
+    if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ error: 'Corpo da requisição vazio. Nada para atualizar.' });
+    }
+
+    // Campos permitidos para atualização
+    const allowedUpdates = ['name', 'email', 'password', 'age'];
+    const updates = Object.keys(req.body);
+    const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+
+    if (!isValidOperation) {
+      return res.status(400).json({ error: 'Tentativa de atualização de campos não permitidos' });
+    }
+
     const [updated] = await User.update(req.body, {
-      where: { id: req.params.id }
+      where: { id: id }
     });
+    
     if (updated) {
-      const updatedUser = await User.findByPk(req.params.id);
+      const updatedUser = await User.findByPk(id);
       return res.json(updatedUser);
     }
+    
     throw new Error('Utilizador não encontrado');
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
 // Eliminar um utilizador
 exports.delete = async (req, res) => {
   try {
+    // Validação do ID
+    const id = req.params.id;
+    
+    if (!id || isNaN(id)) {
+      return res.status(400).json({ error: 'ID inválido. Deve ser um número.' });
+    }
+
     const deleted = await User.destroy({
-      where: { id: req.params.id }
+      where: { id: id }
     });
+    
     if (deleted) {
       return res.json({ message: 'Utilizador eliminado com sucesso' });
     }
+    
     throw new Error('Utilizador não encontrado');
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
-
-// JuniorDelgado
-// Este código define as funções do controlador para a gestão de utilizadores, permitindo operações CRUD.
-// As funções incluem obter todos os utilizadores, obter um utilizador por ID, atualizar um utilizador e eliminar um utilizador.
-// As respostas são enviadas em formato JSON e tratam erros de forma adequada.
-// As funções utilizam o modelo User definido no Sequelize para interagir com a base de dados.
-// Assegura que as operações são realizadas de forma assíncrona e que os erros são capturados e respondidos corretamente.
-// JuniorDelgado
