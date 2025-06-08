@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../db/models/User'); // Importa o modelo User do Sequelize
 const User = db.User;
 
 // Obter todos os utilizadores
