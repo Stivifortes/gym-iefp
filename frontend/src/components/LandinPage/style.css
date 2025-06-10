@@ -1,0 +1,208 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+
+
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+ 
+}
+
+.logo-container .logo {
+  width: 60px;
+  margin-left: 30px;
+}
+
+
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav{
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  padding: 8px 0; 
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #2680fe; 
+}
+
+.login-button {
+  background-color: #2680fe;
+  color: white;
+  border: none;
+  margin-right: 18px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #005cdc;
+}
+
+
+
+
+
+/* ===== HERO ===== */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  background: linear-gradient(to right, #999999 30%, #d9d9d9 100%);
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  font-size: 25px;
+  max-width: 600px;
+  color: white;
+}
+
+.hero-title {
+  font-weight: bold;
+}
+
+.hero-subtitle {
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.signup-button {
+  background-color: #2680fe;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #005cdc;
+}
+
+.plans-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.plans-button:hover {
+  background-color: #3086fe;
+}
+
+.hero-image .muscular-man {
+  height: 32rem;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+
+
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1024px) {
+  .hero {
+    gap: 60px;
+    padding: 40px 20px;
+  }
+
+  .hero-text {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image .muscular-man {
+    height: 38rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .nav {
+    gap: 20px;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    font-size: 26px;
+  }
+
+  .hero-image .muscular-man {
+    height: 32rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text {
+    font-size: 22px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signup-button,
+  .plans-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-image .muscular-man {
+    height: 24rem;
+  }
+}
