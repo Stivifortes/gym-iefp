@@ -2,6 +2,43 @@ const db = require('../db/models/User');
 const User = db.User;
 const { validationResult } = require('express-validator');
 
+// Criar um novo utilizador
+exports.create = async (req, res) => {
+  try {
+    // Validação do corpo da requisição
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Verificar se o corpo da requisição não está vazio
+    if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ error: 'Corpo da requisição vazio. Nada para criar.' });
+    }i
+
+    const { isAdmin, ...userData } = req.body;
+
+    // Se estiver tentando criar um admin, verificar se o usuário atual é admin
+    if (isAdmin) {
+      // Verificar se o usuário atual é admin através do token JWT
+      if (!req.user || !req.user.isAdmin) {
+        return res.status(403).json({ error: 'Apenas administradores podem criar outros administradores' });
+      }
+    }
+
+    // Criação do utilizador com o status de admin apropriado
+    const user = await User.create({
+      ...userData,
+      isAdmin: isAdmin || false // Se não especificado, será falso por padrão
+    });
+
+    return res.status(201).json(user);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+
 // Obter todos os utilizadores
 exports.findAll = async (req, res) => {
   try {
