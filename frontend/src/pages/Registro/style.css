@@ -1,4 +1,4 @@
-* {
+*{
   margin: 0;
   padding: 0;
 }
@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #cacaca;
+  background: #CACACA;
   font-family: Arial, sans-serif;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .registro-input {
-  width: 93%;
+  width: 100%;
   padding: 0.8rem;
   margin-bottom: 1rem;
   margin-top: 0.3rem;
