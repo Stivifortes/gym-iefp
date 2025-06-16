@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.generalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #cacaca;
+}
+
+.signUpContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 350px;
+  background-color: rgb(255, 255, 255);
+  padding: 2.5rem;
+  box-sizing: 'border-box';
+  border-radius: 30px;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 75px;
+}
+
+.title {
+  font-size: 24px;
+  color: #333333;
+  text-align: center;
+}
+
+.topText {
+  font-size: 0.9rem;
+  color: #00000091;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+.imputField {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.inputField {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333333;
+  text-align: left;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dddddd;
+  border-radius: 15px;
+  font-size: 14px;
+  color: #333333;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+.remember {
+  font-size: 0.7rem;
+  color: #00000091;
+  display: flex;
+  gap: 5px;
+}
+
+.signUpButton {
+  width: 100%;
+  padding: 14px;
+  background-color: #257cff;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.signUpButton:hover {
+  background-color: #408cff;
+}
+
+.signInText {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333333;
+}
+
+.signInLink {
+  color: #333333;
+  text-decoration: none;
+  font-weight: bold;
+}
