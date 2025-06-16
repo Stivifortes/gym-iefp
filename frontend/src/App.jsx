@@ -1,16 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import ReactDOM from 'react-dom/client';
+import AppRoutes from './router';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-    <h1>IEFP</h1>
-    </>
-  )
+export default function App() {
+  return <AppRoutes />;
 }
 
-export default App
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
