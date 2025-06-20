@@ -3,7 +3,7 @@ import Login from '../pages/Login';
 import Registro from '../pages/Registro';
 import Layout from '../components/Layout';
 import Home from '../pages/Home';
-import Perfil from '../pages/Perfil';
+import Perfil from '../perfil/perfil';
 import Planos from '../pages/Planos';
 import Inscricoes from '../pages/Inscricoes';
 import Utilizadores from '../pages/Utilizadores';
@@ -18,7 +18,7 @@ export default function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/perfil" element={<Perfil />} />
+        <Route path=" perfil" element={<Perfil />} />
         <Route path="/planos" element={<Planos />} />
         <Route path="/inscricoes" element={<Inscricoes />} />
         <Route path="/utilizadores" element={<Utilizadores />} />
