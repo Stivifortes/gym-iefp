@@ -1,167 +1,70 @@
-const db = require('../db/db')
-const User = db.models.User
 
-const { validationResult } = require('express-validator')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const db = require('../models');
+const User = db.User;
 
-// Criar um novo utilizador
-async function create(req, res) {
+// SIGN UP
+exports.register = async (req, res) => {
+  const { name, email, password, role } = req.body;
+
   try {
-    // Validação do corpo da requisição
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+    // user exist ?
+    const userExists = await User.findOne({ where: { email } });
+    if (userExists) {
+      return res.status(400).json({ message: 'Usuário já existe.' });
     }
 
-    // Verificar se o corpo da requisição não está vazio
-    if (Object.keys(req.body).length === 0) {
-      return res
-        .status(400)
-        .json({ error: 'Corpo da requisição vazio. Nada para criar.' })
-    }
-    i
+    // Hash da senha
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const { isAdmin, ...userData } = req.body
-
-    // Se estiver tentando criar um admin, verificar se o usuário atual é admin
-    if (isAdmin) {
-      // Verificar se o usuário atual é admin através do token JWT
-      if (!req.user || !req.user.isAdmin) {
-        return res.status(403).json({
-          error: 'Apenas administradores podem criar outros administradores'
-        })
-      }
-    }
-
-    // Criação do utilizador com o status de admin apropriado
+    // Create user
     const user = await User.create({
-      ...userData,
-      isAdmin: isAdmin || false // Se não especificado, será falso por padrão
-    })
+      name,
+      email,
+      password: hashedPassword,
+      role: role || 'user',
+    });
 
-    return res.status(201).json(user)
+    res.status(201).json({ message: 'Usuário registrado com sucesso!', userId: user.id });
   } catch (error) {
-    return res.status(500).json({ error: error.message })
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao registrar usuário.' });
   }
-}
+};
 
-// Obter todos os utilizadores
-async function findAll(req, res) {
+// LOGIN
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const users = await User.findAll({
-      attributes: { exclude: ['password'] }
-    })
-    return res.json(users)
-  } catch (error) {
-    return res.status(500).json({ error: error.message })
-  }
-}
-
-// Obter um utilizador por ID
-async function findOne(req, res) {
-  try {
-    // Validação do ID
-    const id = req.params.id
-
-    if (!id || isNaN(id)) {
-      return res.status(400).json({ error: 'ID inválido. Deve ser um número.' })
-    }
-
-    const user = await User.findByPk(id, {
-      attributes: { exclude: ['password'] }
-    })
-
+    // search user -> email
+    const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(404).json({ error: 'Utilizador não encontrado' })
+      return res.status(404).json({ message: 'Usuário não encontrado.' });
     }
 
-    return res.json(user)
+    // Comparar a senha
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Senha incorreta.' });
+    }
+
+    // Gerar token JWT
+
+const token = jwt.sign(
+  { id: user.id, email: user.email, role: user.role },
+  process.env.JWT_SECRET,
+  { expiresIn: '2h' }
+);
+
+    res.status(200).json({ message: 'Login realizado com sucesso!', token,user: {
+        name: user.name,
+        email: user.email,
+        role: user.role
+      } });
   } catch (error) {
-    return res.status(500).json({ error: error.message })
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao fazer login.' });
   }
-}
-
-// Atualizar um utilizador
-async function update(req, res) {
-  try {
-    // Validação do ID
-    const id = req.params.id
-
-    if (!id || isNaN(id)) {
-      return res.status(400).json({ error: 'ID inválido. Deve ser um número.' })
-    }
-
-    // Validação do corpo da requisição
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
-    }
-
-    // Verificar se o corpo da requisição não está vazio
-    if (Object.keys(req.body).length === 0) {
-      return res
-        .status(400)
-        .json({ error: 'Corpo da requisição vazio. Nada para atualizar.' })
-    }
-
-    // Campos permitidos para atualização
-    const allowedUpdates = ['name', 'email', 'password', 'age']
-    const updates = Object.keys(req.body)
-    const isValidOperation = updates.every((update) =>
-      allowedUpdates.includes(update)
-    )
-
-    if (!isValidOperation) {
-      return res
-        .status(400)
-        .json({ error: 'Tentativa de atualização de campos não permitidos' })
-    }
-
-    const [updated] = await User.update(req.body, {
-      where: { id: id }
-    })
-
-    if (updated) {
-      const updatedUser = await User.findByPk(id, {
-        attributes: { exclude: ['password'] }
-      })
-
-      return res.json(updatedUser)
-    }
-
-    throw new Error('Utilizador não encontrado')
-  } catch (error) {
-    return res.status(400).json({ error: error.message })
-  }
-}
-
-// Eliminar um utilizador
-async function deleteUser(req, res) {
-  try {
-    // Validação do ID
-    const id = req.params.id
-
-    if (!id || isNaN(id)) {
-      return res.status(400).json({ error: 'ID inválido. Deve ser um número.' })
-    }
-
-    const deleted = await User.destroy({
-      where: { id: id }
-    })
-
-    if (deleted) {
-      return res.json({ message: 'Utilizador eliminado com sucesso' })
-    }
-
-    throw new Error('Utilizador não encontrado')
-  } catch (error) {
-    return res.status(500).json({ error: error.message })
-  }
-}
-
-module.exports = {
-  findAll,
-  create,
-  findOne,
-  update,
-  delete: deleteUser
-}
+};
