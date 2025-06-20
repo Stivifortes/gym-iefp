@@ -1,8 +1,6 @@
 const express = require('express')
-const { register, login, getProfile } = require('../controllers/authController')
-const { authenticateToken } = require('../middleware/auth')
-
 const router = express.Router()
+const { register, login } = require('../controllers/authController')
 
 /**
  * @swagger
@@ -73,6 +71,5 @@ router.post('/login', login)
  *       401:
  *         description: Não autorizado
  */
-router.get('/profile', authenticateToken, getProfile)
 
 module.exports = router

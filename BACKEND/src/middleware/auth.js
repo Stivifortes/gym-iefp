@@ -1,7 +1,8 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-key-change-in-production'
+const JWT_SECRET =
+  process.env.JWT_SECRET || 'fallback-secret-key-change-in-production'
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
@@ -16,6 +17,7 @@ const authenticateToken = (req, res, next) => {
       return res.status(403).json({ error: 'Token inválido' })
     }
     req.user = user
+
     next()
   })
 }
