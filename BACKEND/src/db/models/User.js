@@ -67,6 +67,14 @@ const User = (connection, sequelize) => {
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+      },
+      planId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'plans',
+          key: 'id'
+        }
       }
     },
     {
