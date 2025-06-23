@@ -5,6 +5,7 @@ export default function Modal({
   title,
   confirmButtonText,
   cancelButtonText,
+ 
 }) {
   return (
     <div>
@@ -32,7 +33,7 @@ export default function Modal({
                       {title}
                     </h3>
                     <div className="mt-2 flex flex-col gap-4 w-full">
-                      {children}
+                      {children }
                     </div>
                   </div>
                 </div>
