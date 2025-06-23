@@ -1,18 +1,16 @@
-import { useAuth } from '../hocks/index.jsx';
+import { useAuth } from '../hooks/useAuth.jsx';
+import LogoutButton from '../components/LogoutButton';
+
 export function Perfil() {
-  const { user, isAuthenticated, error, logout } = useAuth();
-
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
-
-  if (!isAuthenticated) return <p>Carregando ou não autenticado...</p>;
+  const { user } = useAuth();
 
   return (
     <div>
-      <h2>Bem-vindo, {user.name}!</h2>
-      <p>Email: {user.email}</p>
-      <p>Telefone: {user.phone}</p>
-      <p>Endereço: {user.endereco}</p>
-      <button onClick={logout}>Sair</button>
+      <h2>Bem-vindo, {user?.name || 'Usuário'}!</h2>
+      <p>Email: {user?.email}</p>
+      <p>Telefone: {user?.phone}</p>
+      <p>Endereço: {user?.endereco}</p>
+      <LogoutButton>Sair</LogoutButton>
     </div>
   );
 }
