@@ -58,7 +58,7 @@ const Login = () => {
 
       login(data.user, data.token);
 
-      navigate('/dashboard');
+      navigate('/');
     } catch (err) {
       console.error('Login error:', err);
       setError(err.message || 'Erro ao fazer login');

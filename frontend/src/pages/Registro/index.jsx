@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import Logo from '../../assets/Logo.png';
+import { registerUser } from '../../utils/api';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 const Registro = () => {
-  const API_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:3000';
-
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -23,7 +24,6 @@ const Registro = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validação simples no frontend
     if (
       !form.name.trim() ||
       !form.email.trim() ||
@@ -42,32 +42,29 @@ const Registro = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/api/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+      const data = await registerUser({
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        confirmPassword: form.confirmPassword,
+        phone: form.phone,
+        endereco: form.endereco,
       });
 
-      const data = await response.json();
+      console.log('Resposta do backend:', data);
 
-      console.log('Resposta do backend:', data); // Para debug
-
-      if (response.ok) {
-        setMensagem('Conta criada com sucesso!');
-        // Limpar campos após sucesso:
-        setForm({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          phone: '',
-          endereco: '',
-        });
-      } else {
-        setMensagem(data.error || 'Erro no registro');
-      }
+      setMensagem('Conta criada com sucesso!');
+      setForm({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        phone: '',
+        endereco: '',
+      });
+      navigate('/login');
     } catch (error) {
-      setMensagem('Erro ao conectar com o servidor');
+      setMensagem(error.message || 'Erro ao conectar com o servidor');
     }
   };
 
@@ -80,7 +77,30 @@ const Registro = () => {
           Introduz os seus dados para criar uma conta
         </p>
 
-        {mensagem && <p style={{ color: 'red', marginBottom: '1rem' }}>{mensagem}</p>}
+        {mensagem && (
+          <div
+            className="error-message"
+            style={{
+              color:
+                mensagem === 'Conta criada com sucesso!'
+                  ? '#28a745'
+                  : '#dc3545',
+              backgroundColor:
+                mensagem === 'Conta criada com sucesso!'
+                  ? '#d4edda'
+                  : '#f8d7da',
+              border:
+                mensagem === 'Conta criada com sucesso!'
+                  ? '1px solid #c3e6cb'
+                  : '1px solid #f5c6cb',
+              borderRadius: '4px',
+              padding: '10px',
+              marginBottom: '15px',
+              fontSize: '14px',
+            }}>
+            {mensagem}
+          </div>
+        )}
 
         <form className="registro-form" onSubmit={handleSubmit}>
           <label>Nome</label>
