@@ -66,9 +66,6 @@ export default function PlanosTable() {
       descricao: "#####",
       preco: "$$$$",
     },
-    {
-      
-    }
   ]);
 
   const [selectedPlano, setSelectedPlano] = useState(null);
@@ -142,7 +139,7 @@ export default function PlanosTable() {
       <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome" className="border p-2 w-full mb-2 rounded" />
       <input type="text" value={duration} onChange={(e) => setDuration(e.target.value)} placeholder="Duração" className="border p-2 w-full mb-2 rounded" />
       <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição" className="border p-2 w-full mb-2 rounded" />
-      <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Preço" className="border p-2 w-full mb-2 rounded" />
+      <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Preço" className="border p-2 w-full mb-2 rounded" />
     </>
   );
 
