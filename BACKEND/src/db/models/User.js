@@ -55,7 +55,7 @@ const User = (connection, sequelize) => {
         allowNull: true,
         validate: {
           len: {
-            args: [9, 15],
+            args: [7, 15],
             msg: 'Telefone deve ter entre 9 e 15 caracteres'
           }
         }
