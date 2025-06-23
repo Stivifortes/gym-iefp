@@ -1,12 +1,13 @@
 import './App.css'
-import Header from './components/Header'
+import PlanosTable from './pages/gestaoPlanos'
+
+
 
 function App() {
-
-
   return (
     <>
-      <Header />
+
+      <PlanosTable />
 
     </>
   )
