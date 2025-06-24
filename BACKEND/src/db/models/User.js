@@ -75,6 +75,22 @@ const User = (connection, sequelize) => {
           model: 'plans',
           key: 'id'
         }
+      },
+      avatar: {
+        type: DataTypes.TEXT('long'),
+        allowNull: true,
+        validate: {
+          isBase64OrEmpty(value) {
+            if (value && typeof value === 'string' && value.length > 0) {
+              const base64Regex = /^data:image\/(jpeg|jpg|png|gif|webp);base64,/
+              if (!base64Regex.test(value)) {
+                throw new Error(
+                  'Avatar deve ser uma imagem válida em formato base64'
+                )
+              }
+            }
+          }
+        }
       }
     },
     {

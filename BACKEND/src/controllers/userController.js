@@ -104,7 +104,7 @@ async function update(req, res) {
     }
 
     // Campos permitidos para atualização
-    const allowedUpdates = ['name', 'email', 'password', 'age']
+    const allowedUpdates = ['name', 'email', 'password', 'phone', 'endereco']
     const updates = Object.keys(req.body)
     const isValidOperation = updates.every((update) =>
       allowedUpdates.includes(update)
@@ -158,10 +158,74 @@ async function deleteUser(req, res) {
   }
 }
 
+// Atualizar perfil do usuário logado
+async function updateProfile(req, res) {
+  try {
+    // O usuário logado está disponível em req.user através do middleware de autenticação
+    const userId = req.user.id
+
+    // Validação do corpo da requisição
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
+
+    // Verificar se o corpo da requisição não está vazio
+    if (Object.keys(req.body).length === 0) {
+      return res
+        .status(400)
+        .json({ error: 'Corpo da requisição vazio. Nada para atualizar.' })
+    }
+
+    // Campos permitidos para atualização do perfil
+    const allowedUpdates = ['name', 'phone', 'endereco', 'avatar']
+    const updates = Object.keys(req.body)
+    const isValidOperation = updates.every((update) =>
+      allowedUpdates.includes(update)
+    )
+
+    if (!isValidOperation) {
+      return res
+        .status(400)
+        .json({ error: 'Tentativa de atualização de campos não permitidos' })
+    }
+
+    // Validar avatar se fornecido
+    if (req.body.avatar) {
+      const base64Regex = /^data:image\/(jpeg|jpg|png|gif|webp);base64,/
+      if (!base64Regex.test(req.body.avatar)) {
+        return res.status(400).json({
+          error: 'Avatar deve ser uma imagem válida em formato base64'
+        })
+      }
+    }
+
+    const [updated] = await User.update(req.body, {
+      where: { id: userId }
+    })
+
+    if (updated) {
+      const updatedUser = await User.findByPk(userId, {
+        attributes: { exclude: ['password'] }
+      })
+
+      return res.json({
+        message: 'Perfil atualizado com sucesso',
+        user: updatedUser
+      })
+    }
+
+    throw new Error('Usuário não encontrado')
+  } catch (error) {
+    return res.status(400).json({ error: error.message })
+  }
+}
+
 module.exports = {
   findAll,
   create,
   findOne,
   update,
-  delete: deleteUser
+  delete: deleteUser,
+  updateProfile
 }
