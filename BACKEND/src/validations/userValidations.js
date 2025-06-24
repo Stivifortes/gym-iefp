@@ -33,3 +33,35 @@ exports.updateUserValidation = [
     .isInt({ min: 12, max: 100 })
     .withMessage('A idade deve ser entre 12 e 100 anos')
 ]
+
+exports.updateProfileValidation = [
+  body('name')
+    .optional()
+    .trim()
+    .isLength({ min: 2, max: 100 })
+    .withMessage('O nome deve ter entre 2 e 100 caracteres'),
+
+  body('phone')
+    .optional()
+    .trim()
+    .isLength({ min: 9, max: 15 })
+    .withMessage('O telefone deve ter entre 9 e 15 caracteres'),
+
+  body('endereco')
+    .optional()
+    .trim()
+    .isLength({ max: 255 })
+    .withMessage('O endereço deve ter no máximo 255 caracteres'),
+
+  body('avatar')
+    .optional()
+    .custom((value) => {
+      if (value && typeof value === 'string' && value.length > 0) {
+        const base64Regex = /^data:image\/(jpeg|jpg|png|gif|webp);base64,/;
+        if (!base64Regex.test(value)) {
+          throw new Error('Avatar deve ser uma imagem válida em formato base64');
+        }
+      }
+      return true;
+    })
+]

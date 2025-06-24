@@ -3,7 +3,8 @@ const router = express.Router()
 const userController = require('../controllers/userController')
 const {
   userIdValidation,
-  updateUserValidation
+  updateUserValidation,
+  updateProfileValidation
 } = require('../validations/userValidations')
 const { getProfile } = require('../controllers/authController')
 const { authenticateToken } = require('../middleware/auth')
@@ -11,6 +12,7 @@ const { authenticateToken } = require('../middleware/auth')
 // Rotas para Utilizadores
 router.post('/', userController.create)
 router.get('/profile', authenticateToken, getProfile)
+router.put('/profile', authenticateToken, updateProfileValidation, userController.updateProfile)
 router.get('/', authenticateToken, userController.findAll)
 // Rotas para Utilizadores
 router.get('/:id', authenticateToken, userIdValidation, userController.findOne)
