@@ -1,0 +1,127 @@
+:root {
+  --primary-color: #3b82f6;
+  --bg-light: #f5f5f5;
+  --text-color: #000;
+  --border-radius: 20px;
+  --font-main: 'Inter', sans-serif;
+}
+
+.plan-details-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  overflow-x: auto;
+}
+
+.plan-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.plan-box {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background-color: #fff;
+  border: 3px solid #cfcfcf;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.plan-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.plan-logo img {
+  width: 60px;
+  height: auto;
+}
+
+.plan-title {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.plan-info-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background-color: var(--bg-light);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.plan-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 250px;
+}
+
+.plan-info span {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: var(--font-main);
+  color: var(--text-color);
+}
+
+.plan-info span.bold {
+  font-weight: 600;
+}
+
+.plan-image {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.plan-image img {
+  width: 140px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.plan-message {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.plan-message p {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-color);
+}
+
+/* Responsivo para tablets e celulares */
+@media (max-width: 768px) {
+  .plan-details-container {
+    flex-direction: column;
+  }
+
+  .plan-info-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .plan-title {
+    font-size: 1.5rem;
+  }
+
+  .plan-message p {
+    font-size: 1.25rem;
+  }
+}
