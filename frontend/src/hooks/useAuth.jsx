@@ -87,6 +87,15 @@ export function useAuth() {
       setIsAdmin(true);
     }
   };
+  const updateUser = (userData) => {
+    console.log('UpdateUser function called with:', userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
+    if (userData.isAdmin) {
+      setIsAdmin(true);
+    }
+  };
+
   const logout = () => {
     console.log('Logout function called');
     localStorage.removeItem('token');
@@ -96,6 +105,7 @@ export function useAuth() {
     setIsAdmin(false);
     setLoading(false);
   };
+
   return {
     user,
     isAuthenticated,
@@ -103,5 +113,6 @@ export function useAuth() {
     loading,
     login,
     logout,
+    updateUser,
   };
 }

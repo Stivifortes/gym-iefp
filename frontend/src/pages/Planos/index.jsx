@@ -1,17 +1,15 @@
 import React from 'react';
 import './style.css';
-import TopBar from '../../components/TopBar/index';
 import logo from '../../assets/Logo.png';
+import { useAuth } from '../../hooks/useAuth';
 // import Sidebar from '../../components/Sidebar';
 
-const Planos = () => {
+const NormalUserPlanDetail = () => {
   return (
     <div className="plan-details-container">
       {/* <Sidebar /> */}
 
       <div className="plan-main">
-        <TopBar />
-
         <div className="plan-box">
           <div className="plan-logo">
             <img src={logo} alt="Logo" />
@@ -55,6 +53,10 @@ const Planos = () => {
       </div>
     </div>
   );
+};
+const Planos = () => {
+  const { isAdmin } = useAuth();
+  return isAdmin ? <p>I am admin</p> : <NormalUserPlanDetail />;
 };
 
 export default Planos;

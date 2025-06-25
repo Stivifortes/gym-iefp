@@ -15,6 +15,7 @@ import Utilizadores from '../pages/Utilizadores';
 import Dashboard from '../pages/Dashboard';
 import RecuperaSenha from '../pages/RecuperaSenha';
 import { useAuth } from '../hooks/useAuth';
+import LayoutDashboard from '../components/LayoutDashboard';
 
 // Protected Route Component
 function ProtectedRoute({ children }) {
@@ -47,49 +48,50 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/recupera-senha" element={<RecuperaSenha />} />
-        <Route path="/planos" element={<Planos />} />
 
         {/* Protected Routes */}
-        <Route
-          path="/perfil"
-          element={
-            <ProtectedRoute>
-              <Perfil />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/planos"
-          element={
-            <ProtectedRoute>
-              <Planos />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/inscricoes"
-          element={
-            <ProtectedRoute>
-              <Inscricoes />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/utilizadores"
-          element={
-            <ProtectedRoute>
-              <Utilizadores />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="dashboard" element={<LayoutDashboard />}>
+          <Route
+            path="perfil"
+            element={
+              <ProtectedRoute>
+                <Perfil />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="planos"
+            element={
+              <ProtectedRoute>
+                <Planos />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="inscricoes"
+            element={
+              <ProtectedRoute>
+                <Inscricoes />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="utilizadores"
+            element={
+              <ProtectedRoute>
+                <Utilizadores />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            index
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
       </Routes>
     </Router>
   );
