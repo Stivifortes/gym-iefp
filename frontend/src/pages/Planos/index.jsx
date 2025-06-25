@@ -44,7 +44,7 @@ const Planos = () => {
             </div>
 
             <div className="plan-image">
-              <img src="/images/img_oip_1.png" alt="Plan Image" />
+              {/* <img src="#" alt="Plan Image" /> */}
             </div>
           </div>
 
