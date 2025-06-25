@@ -12,7 +12,7 @@ import Perfil from '../perfil/perfil';
 import Planos from '../pages/Planos';
 import Inscricoes from '../pages/Inscricoes';
 import Utilizadores from '../pages/Utilizadores';
-import Dashboard from '../pages/Dashboard';
+import Dashboard from '../pages/Dashboard/dashboard';
 import RecuperaSenha from '../pages/RecuperaSenha';
 import { useAuth } from '../hooks/useAuth';
 import LayoutDashboard from '../components/LayoutDashboard';

@@ -1,0 +1,241 @@
+.dashboard {
+  width: 100%;
+  padding: 20px;
+  background-color: #cecece;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+h1,
+h3,
+h2,
+h4 {
+  margin: 0 0 15px 0;
+  font-weight: 600;
+}
+
+h1 {
+  text-align: center;
+  color: #1e90ff;
+  font-size: 2.4rem;
+  margin-bottom: 40px;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: linear-gradient(135deg, #6ec1ff 0%, #1e90ff 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 25px 20px;
+  width: 280px;
+  text-align: left;
+  box-shadow: 0 8px 20px rgba(30, 144, 255, 0.3);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(30, 144, 255, 0.5);
+}
+
+.card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+}
+
+.card p {
+  margin: 6px 0;
+  font-size: 1rem;
+}
+
+.card span {
+  font-weight: 700;
+}
+
+.divider {
+  margin: 50px 0;
+  border-top: 1px solid #ddd;
+}
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 20px;
+}
+.stats-container h1,
+.title-graph {
+  color: #000;
+  text-align: left;
+  font-weight: 700;
+  font-size: 20px;
+}
+/* Estatísticas em círculos */
+.stats-circles {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid #1e90ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.circle:hover {
+  border-color: #28a745;
+}
+
+.circle h4 {
+  margin: 0;
+  font-size: 26px;
+  color: #1e90ff;
+  font-weight: 700;
+}
+
+.circle p {
+  margin: 5px 0 3px 0;
+  font-size: 15px;
+  color: #555;
+  font-weight: 600;
+}
+
+.circle span {
+  font-size: 13px;
+  color: #999;
+  font-weight: 500;
+}
+
+/* Tabela de usuários */
+.user-table {
+  margin-top: 40px;
+  overflow-x: auto;
+}
+
+.user-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  min-width: 700px;
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  color: #444;
+}
+
+.user-table th {
+  background-color: #f7f9fc;
+  font-weight: 700;
+  color: #1e90ff;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.user-table tbody tr:hover {
+  background-color: #f0f7ff;
+  cursor: pointer;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-align: center;
+  width: 90px;
+  display: inline-block;
+  box-sizing: content-box;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.status.pago {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+  box-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
+}
+
+.status.pendente {
+  background-color: #fff9c4;
+  color: #f57f17;
+  box-shadow: 0 0 8px rgba(245, 127, 23, 0.3);
+}
+
+/* Gráfico de barras - container */
+.payment-stats {
+  margin: 0 auto 40px auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .cards {
+    justify-content: center;
+  }
+
+  .card {
+    width: 180px;
+    padding: 20px 15px;
+  }
+
+  .user-table table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    gap: 15px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .user-table table {
+    min-width: 100%;
+  }
+
+  .user-table th,
+  .user-table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}
