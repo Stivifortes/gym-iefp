@@ -47,6 +47,7 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/recupera-senha" element={<RecuperaSenha />} />
+        <Route path="/planos" element={<Planos />} />
 
         {/* Protected Routes */}
         <Route

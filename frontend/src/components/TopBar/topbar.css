@@ -3,22 +3,45 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 10px;
-  margin: 20px 40px;
+  width: calc(100% - 40px); /* Reduz chance de overflow em telas pequenas */
+  padding: 10px 20px;
+  margin: 20px auto; /* Centraliza horizontalmente */
   border-radius: 20px;
   border: 1px solid #257cff;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-sizing: border-box;
 }
+
 .pageTitle {
   font-size: 20px;
   font-weight: 700;
+  flex: 1; /* Ocupa o espaço disponível */
+  min-width: 150px;
 }
+
 .userName {
   font-size: 16px;
   font-weight: 400;
-  width: 100%;
+  max-width: 180px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 180px;
+  flex-shrink: 0;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 600px) {
+  .topbarContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .pageTitle,
+  .userName {
+    width: 100%;
+    max-width: 100%;
+  }
 }
