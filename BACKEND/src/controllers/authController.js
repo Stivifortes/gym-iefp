@@ -165,7 +165,27 @@ const login = async (req, res) => {
 const getProfile = async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id, {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: db.models.Plans,
+          as: 'currentPlan',
+          attributes: ['id', 'name', 'price', 'description']
+        },
+        {
+          model: db.models.UserPlanSubscription,
+          as: 'subscriptions',
+          where: { status: 'ativo' },
+          required: false,
+          include: [
+            {
+              model: db.models.Plans,
+              as: 'plan',
+              attributes: ['id', 'name', 'price', 'description']
+            }
+          ]
+        }
+      ]
     })
 
     if (!user) {
