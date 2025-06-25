@@ -18,7 +18,6 @@ async function create(req, res) {
         .status(400)
         .json({ error: 'Corpo da requisição vazio. Nada para criar.' })
     }
-    i
 
     const { isAdmin, ...userData } = req.body
 
