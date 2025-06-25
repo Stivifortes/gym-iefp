@@ -78,3 +78,7 @@ export const createPlan = async (planData) => {
     body: JSON.stringify(planData),
   });
 };
+
+export const getDashboardStatistics = async () => {
+  return apiRequest('/statistics/dashboard');
+};

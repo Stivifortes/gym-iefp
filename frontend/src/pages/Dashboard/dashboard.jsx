@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 
 // 📊 Importa os componentes do gráfico
@@ -11,40 +11,97 @@ import {
   Tooltip,
   ResponsiveContainer,
   BarChart,
-  Bar
+  Bar,
 } from 'recharts';
+import { getDashboardStatistics } from '../../utils/api';
 
 // 🟦 Componente para os cards
 function CardInfo({ nome, usuarios, percentual }) {
   return (
     <div className="card">
       <h2>{nome}</h2>
-      <p>Usuários: <span>{usuarios}</span></p>
-      <p>Percentual: <span>{percentual}</span></p>
+      <p>
+        Usuários: <span>{usuarios}</span>
+      </p>
+      <p>
+        Percentual: <span>{percentual}</span>
+      </p>
     </div>
   );
 }
 
 export default function Dashboard() {
+  const [stats, setStats] = useState({});
+  useEffect(() => {
+    getDashboardStatistics().then((response) => setStats(response));
+  }, []);
   const planos = [
-    { nome: "Plano Semanal", usuarios: 100, percentual: "10%" },
-    { nome: "Plano Mensal", usuarios: 700, percentual: "70%" },
-    { nome: "Plano Trimestral", usuarios: 200, percentual: "20%" }
+    { nome: 'Plano Semanal', usuarios: 100, percentual: '10%' },
+    { nome: 'Plano Mensal', usuarios: 700, percentual: '70%' },
+    { nome: 'Plano Trimestral', usuarios: 200, percentual: '20%' },
   ];
 
   const pagamentos = {
     valores: [800, 150, 50],
-    labels: ["Pagos", "Pendentes", "Isentos"],
-    percentuais: ["80%", "15%", "5%"]
+    labels: ['Pagos', 'Pendentes', 'Isentos'],
+    percentuais: ['80%', '15%', '5%'],
   };
 
   const usuarios = [
-    { id: '00033', nome: 'Geremy Gomes Dos Santos', data: '12/09/2025', hora: '08:33', plano: 'Plano Semanal', status: 'Pago', valor: '500$' },
-    { id: '00333', nome: 'Geremy Gomes Dos Santos', data: '12/09/2025', hora: '08:33', plano: 'Plano Mensal', status: 'Pendente', valor: '2000$' },
-    { id: '26426', nome: 'Geremy Gomes Dos Santos', data: '12/09/2025', hora: '08:33', plano: 'Plano Mensal', status: 'Pendente', valor: '2000$' },
-    { id: '42466', nome: 'Geremy Gomes Dos Santos', data: '12/09/2025', hora: '08:33', plano: 'Plano Semanal', status: 'Pago', valor: '500$' },
-    { id: '04433', nome: 'Geremy Gomes Dos Santos', data: '12/09/2025', hora: '08:33', plano: 'Plano Trimestral', status: 'Pago', valor: '6000$' },
-    { id: '00344', nome: 'Geremy Gomes Dos Santos', data: '12/09/2025', hora: '08:33', plano: 'Plano Semanal', status: 'Pago', valor: '500$' }
+    {
+      id: '00033',
+      nome: 'Geremy Gomes Dos Santos',
+      data: '12/09/2025',
+      hora: '08:33',
+      plano: 'Plano Semanal',
+      status: 'Pago',
+      valor: '500$',
+    },
+    {
+      id: '00333',
+      nome: 'Geremy Gomes Dos Santos',
+      data: '12/09/2025',
+      hora: '08:33',
+      plano: 'Plano Mensal',
+      status: 'Pendente',
+      valor: '2000$',
+    },
+    {
+      id: '26426',
+      nome: 'Geremy Gomes Dos Santos',
+      data: '12/09/2025',
+      hora: '08:33',
+      plano: 'Plano Mensal',
+      status: 'Pendente',
+      valor: '2000$',
+    },
+    {
+      id: '42466',
+      nome: 'Geremy Gomes Dos Santos',
+      data: '12/09/2025',
+      hora: '08:33',
+      plano: 'Plano Semanal',
+      status: 'Pago',
+      valor: '500$',
+    },
+    {
+      id: '04433',
+      nome: 'Geremy Gomes Dos Santos',
+      data: '12/09/2025',
+      hora: '08:33',
+      plano: 'Plano Trimestral',
+      status: 'Pago',
+      valor: '6000$',
+    },
+    {
+      id: '00344',
+      nome: 'Geremy Gomes Dos Santos',
+      data: '12/09/2025',
+      hora: '08:33',
+      plano: 'Plano Semanal',
+      status: 'Pago',
+      valor: '500$',
+    },
   ];
 
   const dadosGraficoLinha = [
@@ -59,30 +116,35 @@ export default function Dashboard() {
     { mes: 'Set', usuarios: 40 },
     { mes: 'Out', usuarios: 50 },
     { mes: 'Nov', usuarios: 55 },
-    { mes: 'Dez', usuarios: 50 }
+    { mes: 'Dez', usuarios: 50 },
   ];
 
   const dadosGraficoBarras = pagamentos.labels.map((label, i) => ({
     categoria: label,
-    valor: pagamentos.valores[i]
+    valor: pagamentos.valores[i],
   }));
 
   return (
     <div className="dashboard">
-      
       <div className="cards">
         <div className="card">
           <h2>Total Usuários</h2>
-          <p>Usuários: <span>1000</span></p>
-          <p>Pendentes: <span>53</span></p>
+          <p>
+            Usuários:{' '}
+            
+            <span>{stats?.totalUsersAndPending?.totalUsers ?? 0}</span>
+          </p>
+          <p>
+            Pendentes: <span>{stats?.totalUsersAndPending?.pending ?? 0}</span>
+          </p>
         </div>
 
-        {planos.map((plano, index) => (
+        {(stats?.plansUsersCount ?? []).map((plano, index) => (
           <CardInfo
             key={index}
-            nome={plano.nome}
-            usuarios={plano.usuarios}
-            percentual={plano.percentual}
+            nome={plano.name}
+            usuarios={plano.count}
+            percentual={plano.percentage}
           />
         ))}
       </div>
@@ -90,22 +152,31 @@ export default function Dashboard() {
       <div className="divider"></div>
 
       <div className="payment-stats">
-        <h3>Estatística de Pagamento</h3>
-
-        <div className="stats-circles">
-          {pagamentos.labels.map((label, i) => (
-            <div key={i} className="circle">
-              <h4>{pagamentos.valores[i]}</h4>
-              <p>{label}</p>
-              <span>{pagamentos.percentuais[i]}</span>
-            </div>
-          ))}
+        <div className="stats-container">
+          <h1>Estatisticas de pagamento</h1>
+          <div className="stats-circles">
+            {pagamentos.labels.map((label, i) => (
+              <div key={i} className="circle">
+                <h4>{pagamentos.valores[i]}</h4>
+                <p>{label}</p>
+                <span>{pagamentos.percentuais[i]}</span>
+              </div>
+            ))}
+          </div>
         </div>
-
         {/* ✅ Novo gráfico de barras substituindo o antigo CSS */}
-        <div style={{ width: '100%', height: 300 }}>
-          <ResponsiveContainer>
-            <BarChart data={dadosGraficoBarras}>
+        <div
+          style={{
+            width: '50%',
+            height: 300,
+            backgroundColor: '#fff',
+            padding: '10px',
+            borderRadius: '20px',
+          }}>
+          <h1 className="title-graph">Grafico de usuarios</h1>
+
+          <ResponsiveContainer height={200}>
+            <BarChart data={dadosGraficoBarras} height={200}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="categoria" />
               <YAxis />
@@ -138,9 +209,13 @@ export default function Dashboard() {
                 <td>{index + 1}</td>
                 <td>#{user.id}</td>
                 <td>{user.nome}</td>
-                <td>{user.data} | {user.hora}</td>
+                <td>
+                  {user.data} | {user.hora}
+                </td>
                 <td>{user.plano}</td>
-                <td className={`status ${user.status.toLowerCase()}`}>{user.status}</td>
+                <td className={`status ${user.status.toLowerCase()}`}>
+                  {user.status}
+                </td>
                 <td>{user.valor}</td>
               </tr>
             ))}
@@ -149,7 +224,6 @@ export default function Dashboard() {
       </div>
 
       <div className="divider"></div>
-
     </div>
   );
 }
