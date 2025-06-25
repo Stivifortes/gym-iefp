@@ -1,16 +1,5 @@
-import './App.css'
-import PlanosTable from './pages/gestaoPlanos'
-
-
-
-function App() {
-  return (
-    <>
-
-      <PlanosTable />
-
-    </>
-  )
+import AppRoutes from './router';
+import './App.css';
+export default function App() {
+  return <AppRoutes />;
 }
-
-export default App

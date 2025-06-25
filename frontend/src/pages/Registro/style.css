@@ -1,0 +1,81 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.registro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #CACACA;
+  font-family: Arial, sans-serif;
+}
+
+.registro-box {
+  background: #fff;
+  border-radius: 30px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.registro-logo {
+  width: 80px;
+  margin-bottom: 1rem;
+}
+
+.registro-titulo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.registro-subtitulo {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 1.5rem;
+}
+
+.registro-form {
+  text-align: left;
+}
+
+.registro-input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.registro-botao {
+  width: 100%;
+  padding: 1rem;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.registro-botao:hover {
+  background-color: #135fc0;
+}
+
+.registro-login {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.registro-login a {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: bold;
+}
