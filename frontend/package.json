@@ -13,9 +13,12 @@
     "prettier:check": "prettier --config .prettierrc.cjs --check ."
   },
   "dependencies": {
-    "icons": "^1.0.0",
+    "@tailwindcss/vite": "^4.1.10",
+    "axios": "^1.9.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.10",
+    "icons": "^1.0.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.1"
   },

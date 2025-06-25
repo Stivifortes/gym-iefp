@@ -1,0 +1,45 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background-color: white;
+    font-family: sans-serif;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 80px;
+}
+
+.logo-img{
+    height: 100px;
+    width: 100px;
+
+}
+
+.menu ul{
+    display: flex;
+    list-style: none;
+    font-size: 25px;
+    cursor: pointer;
+    margin-left: 1200px;
+
+}
+
+.menu ul li{
+   margin: 30px;
+}
+
+.login-button{
+  background-color: #2979ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}

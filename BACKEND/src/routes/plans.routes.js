@@ -7,7 +7,7 @@ const { authenticateToken } = require('../middleware/auth')
 const isAdmin = require('../middleware/isAdmin')
 
 router.post('/', authenticateToken, isAdmin, planController.create)
-router.get('/', authenticateToken, isAdmin, planController.getAll)
+router.get('/', planController.getAll)
 router.get('/:id', authenticateToken, isAdmin, planController.getById)
 router.put('/:id', authenticateToken, isAdmin, planController.update)
 router.delete('/:id', authenticateToken, isAdmin, planController.remove)

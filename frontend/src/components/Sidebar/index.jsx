@@ -152,18 +152,15 @@ export default function Sidebar({
                 isActive={isActiveRoute('/dashboard/perfil')}
               />
             </li>
-            {isAdmin && (
-              <li>
-                <SideBarItem
-                  Icon={<FaThLarge />}
-                  title="Plano"
-                  url="/dashboard/planos"
-                  isCollapsed={isCollapsed}
-                  isActive={isActiveRoute('/dashboard/planos')}
-                />
-              </li>
-            )}
-
+            <li>
+              <SideBarItem
+                Icon={<FaThLarge />}
+                title="Plano"
+                url="/dashboard/planos"
+                isCollapsed={isCollapsed}
+                isActive={isActiveRoute('/dashboard/planos')}
+              />
+            </li>
             {isAdmin && (
               <li>
                 <SideBarItem
